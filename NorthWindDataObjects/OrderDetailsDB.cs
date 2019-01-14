@@ -11,8 +11,8 @@ namespace NorthWindDataObjects
     {
         public static List<OrderDetails> GetOrderDetails()
         {
-            List<OrderDetails> ordDtls = new List<OrderDetails>();
-            OrderDetails odtl;
+            
+            OrderDetails detail;
             SqlConnection con = Connection.GetConnection();
 
             string sql = "SELECT OrderID, ProductID, UnitPrice, Quantity, Discount" +  
@@ -20,21 +20,24 @@ namespace NorthWindDataObjects
 
             SqlCommand cmd = new SqlCommand(sql, con);
 
+            List<OrderDetails> detailsList = new List<OrderDetails>();
+
             try
             {
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
-
-                odtl = new OrderDetails();
+              
                 while (reader.Read())
                 {
-                    odtl.OrderID = (int)reader["OrderID"];
-                    odtl.ProductID = (int)reader["ProductID"];
-                    odtl.UnitPrice = (decimal)reader["UnitPrice"];
-                    odtl.Quantity = Convert.ToInt16(reader["Quantity"]);
-                    odtl.Discount = (Single)reader["Discount"];
+                    detail = new OrderDetails();
 
-                    ordDtls.Add(odtl);
+                    detail.OrderID = (int)reader["OrderID"];
+                    detail.ProductID = (int)reader["ProductID"];
+                    detail.UnitPrice = (decimal)reader["UnitPrice"];
+                    detail.Quantity = Convert.ToInt16(reader["Quantity"]);
+                    detail.Discount = (Single)reader["Discount"];
+
+                    detailsList.Add(detail);
                 }
 
             }
@@ -48,7 +51,7 @@ namespace NorthWindDataObjects
                 con.Close();
             }
 
-            return ordDtls;
+            return detailsList;
 
         }
     }

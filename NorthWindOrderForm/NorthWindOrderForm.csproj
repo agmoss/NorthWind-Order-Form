@@ -70,7 +70,7 @@
     <None Include="App.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="connections.config">
+    <None Include="Connections.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Properties\DataSources\NorthWindDataObjects.Order.datasource" />

@@ -19,5 +19,6 @@ namespace NorthWindDataObjects
         public decimal UnitPrice { get => unitPrice; set => unitPrice = value; }
         public int Quantity { get => quantity; set => quantity = value; }
         public Single Discount { get => discount; set => discount = value; }
+
     }
 }
