@@ -25,6 +25,16 @@ namespace NorthWindOrderForm
         private void Form1_Load(object sender, EventArgs e)
         {
 
+            foreach (Control c in this.Controls)
+            {
+                if (c is DateTimePicker)
+                {
+                    ((DateTimePicker)c).CustomFormat = " ";
+                    ((DateTimePicker)c).Format = DateTimePickerFormat.Custom;
+                    //((DateTimePicker)c).Checked = false;
+                }
+            }
+
             List<Order> ordersList = OrdersDB.GetOrders();
 
             var linqOrds = from ord in ordersList
@@ -39,23 +49,41 @@ namespace NorthWindOrderForm
             }
         }
 
+        public void EvaluateDateTime(DateTime? dateProperty, DateTimePicker dateControl)
+        {
+            if (dateProperty != null)
+            {
+                dateControl.CustomFormat = null;
+                dateControl.Format = DateTimePickerFormat.Long; // set the date format you want.
+                dateControl.Value = (DateTime)dateProperty; // The error is here
+            }
+            else
+            {
+                dateControl.CustomFormat = " ";
+                dateControl.Format = DateTimePickerFormat.Custom;
+            }
+        }
+
         private void orderIDComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Get order information
-            var order = orderList.FirstOrDefault(i => i.OrderID == Convert.ToInt32(orderIDComboBox.Text));
+            var order = orderList.First(i => i.OrderID == Convert.ToInt32(orderIDComboBox.Text));
 
             if (order != null)
             {
                 customerIDTextBox.Text = order.CustomerID;
                 employeeIDTextBox.Text = order.EmployeeID.ToString();
                 freightTextBox.Text = order.Freight.ToString();
-                orderDateDateTimePicker.Text = order.OrderDate.ToString();
-                requiredDateDateTimePicker.Text = order.RequiredDate.ToString();
+
+                EvaluateDateTime(order.ShippedDate, shippedDateDateTimePicker);
+                EvaluateDateTime(order.OrderDate, orderDateDateTimePicker);
+                EvaluateDateTime(order.RequiredDate, requiredDateDateTimePicker);
+
+
                 shipAddressTextBox.Text = order.ShipAddress;
                 shipCityTextBox.Text = order.ShipCity;
                 shipCountryTextBox.Text = order.ShipCountry;
                 shipNameTextBox.Text = order.ShipName;
-                shippedDateDateTimePicker.Text = order.ShippedDate.ToString();
                 shipPostalCodeTextBox.Text = order.ShipPostalCode;
                 shipRegionTextBox.Text = order.ShipRegion;
                 shipViaTextBox.Text = order.ShipVia.ToString();
@@ -92,30 +120,32 @@ namespace NorthWindOrderForm
         }
           
         
-        private void shippedDateDateTimePicker_ValueChanged(object sender, EventArgs e)
-        {
-            //  ShippedDate cannot be earlier than OrderDate or later than RequiredDate, if these date values are not null
-            try
-            {
-                DateTime sDate = Convert.ToDateTime(shippedDateDateTimePicker.Text);
-                DateTime oDate = Convert.ToDateTime(orderDateDateTimePicker.Text);
-                DateTime rDate = Convert.ToDateTime(requiredDateDateTimePicker.Text);
+        //private void shippedDateDateTimePicker_ValueChanged(object sender, EventArgs e)
+        //{
+        //    //  ShippedDate cannot be earlier than OrderDate or later than RequiredDate, if these date values are not null
 
-                if (sDate <= oDate || sDate >= rDate)
-                {
-                    // Shipped date is invalid
-                    errorProvider1.SetError(shippedDateDateTimePicker, "Shipped date must be between the shipped date and the order date");                  
-                }
-                else
-                {
-                    errorProvider1.Clear();
-                }
-            }
-            catch (Exception)
-            {
-                errorProvider1.SetError(requiredDateDateTimePicker, "Unable to change Shipped date");               
-            }
-        }
+        //    try
+        //    {
+        //        DateTime sDate = Convert.ToDateTime(shippedDateDateTimePicker.Text);
+        //        DateTime oDate = Convert.ToDateTime(orderDateDateTimePicker.Text);
+        //        DateTime rDate = Convert.ToDateTime(requiredDateDateTimePicker.Text);
+
+        //        if (sDate <= oDate || sDate >= rDate)
+        //        {
+        //            // Shipped date is invalid
+        //            errorProvider1.SetError(shippedDateDateTimePicker, "Shipped date must be between the shipped date and the order date");
+        //        }
+        //        else
+        //        {
+        //            errorProvider1.Clear();
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        errorProvider1.SetError(requiredDateDateTimePicker, "Unable to change Shipped date");
+        //    }
+                  
+        //}
 
         private void btnSave_Click(object sender, EventArgs e)
         {

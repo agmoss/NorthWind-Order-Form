@@ -69,7 +69,6 @@
             this.shipCityTextBox = new System.Windows.Forms.TextBox();
             this.shipCountryTextBox = new System.Windows.Forms.TextBox();
             this.shipNameTextBox = new System.Windows.Forms.TextBox();
-            this.shippedDateDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.shipPostalCodeTextBox = new System.Windows.Forms.TextBox();
             this.shipRegionTextBox = new System.Windows.Forms.TextBox();
             this.shipViaTextBox = new System.Windows.Forms.TextBox();
@@ -84,6 +83,7 @@
             this.txtOrderTotal = new System.Windows.Forms.TextBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.btnSave = new System.Windows.Forms.Button();
+            this.shippedDateDateTimePicker = new System.Windows.Forms.DateTimePicker();
             customerIDLabel = new System.Windows.Forms.Label();
             employeeIDLabel = new System.Windows.Forms.Label();
             freightLabel = new System.Windows.Forms.Label();
@@ -399,6 +399,7 @@
             // 
             // orderDateDateTimePicker
             // 
+            this.orderDateDateTimePicker.Checked = false;
             this.orderDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.orderBindingSource, "OrderDate", true));
             this.orderDateDateTimePicker.Enabled = false;
             this.orderDateDateTimePicker.Location = new System.Drawing.Point(509, 172);
@@ -418,6 +419,7 @@
             // 
             // requiredDateDateTimePicker
             // 
+            this.requiredDateDateTimePicker.Checked = false;
             this.requiredDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.orderBindingSource, "RequiredDate", true));
             this.requiredDateDateTimePicker.Enabled = false;
             this.requiredDateDateTimePicker.Location = new System.Drawing.Point(509, 201);
@@ -460,15 +462,6 @@
             this.shipNameTextBox.Name = "shipNameTextBox";
             this.shipNameTextBox.Size = new System.Drawing.Size(200, 20);
             this.shipNameTextBox.TabIndex = 20;
-            // 
-            // shippedDateDateTimePicker
-            // 
-            this.shippedDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.orderBindingSource, "ShippedDate", true));
-            this.shippedDateDateTimePicker.Location = new System.Drawing.Point(509, 227);
-            this.shippedDateDateTimePicker.Name = "shippedDateDateTimePicker";
-            this.shippedDateDateTimePicker.Size = new System.Drawing.Size(200, 20);
-            this.shippedDateDateTimePicker.TabIndex = 22;
-            this.shippedDateDateTimePicker.ValueChanged += new System.EventHandler(this.shippedDateDateTimePicker_ValueChanged);
             // 
             // shipPostalCodeTextBox
             // 
@@ -579,6 +572,14 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // shippedDateDateTimePicker
+            // 
+            this.shippedDateDateTimePicker.Checked = false;
+            this.shippedDateDateTimePicker.Location = new System.Drawing.Point(509, 231);
+            this.shippedDateDateTimePicker.Name = "shippedDateDateTimePicker";
+            this.shippedDateDateTimePicker.Size = new System.Drawing.Size(200, 20);
+            this.shippedDateDateTimePicker.TabIndex = 12;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -600,6 +601,7 @@
             this.Controls.Add(orderIDLabel);
             this.Controls.Add(this.orderIDComboBox);
             this.Controls.Add(requiredDateLabel);
+            this.Controls.Add(this.shippedDateDateTimePicker);
             this.Controls.Add(this.requiredDateDateTimePicker);
             this.Controls.Add(shipAddressLabel);
             this.Controls.Add(this.shipAddressTextBox);
@@ -610,7 +612,6 @@
             this.Controls.Add(shipNameLabel);
             this.Controls.Add(this.shipNameTextBox);
             this.Controls.Add(shippedDateLabel);
-            this.Controls.Add(this.shippedDateDateTimePicker);
             this.Controls.Add(shipPostalCodeLabel);
             this.Controls.Add(this.shipPostalCodeTextBox);
             this.Controls.Add(shipRegionLabel);
@@ -659,7 +660,6 @@
         private System.Windows.Forms.TextBox shipCityTextBox;
         private System.Windows.Forms.TextBox shipCountryTextBox;
         private System.Windows.Forms.TextBox shipNameTextBox;
-        private System.Windows.Forms.DateTimePicker shippedDateDateTimePicker;
         private System.Windows.Forms.TextBox shipPostalCodeTextBox;
         private System.Windows.Forms.TextBox shipRegionTextBox;
         private System.Windows.Forms.TextBox shipViaTextBox;
@@ -674,6 +674,7 @@
         private System.Windows.Forms.TextBox txtOrderTotal;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.DateTimePicker shippedDateDateTimePicker;
     }
 }
 
