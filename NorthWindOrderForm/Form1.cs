@@ -25,13 +25,13 @@ namespace NorthWindOrderForm
         private void Form1_Load(object sender, EventArgs e)
         {
 
+            // Grey out the datetime controls
             foreach (Control c in this.Controls)
             {
                 if (c is DateTimePicker)
                 {
                     ((DateTimePicker)c).CustomFormat = " ";
                     ((DateTimePicker)c).Format = DateTimePickerFormat.Custom;
-                    //((DateTimePicker)c).Checked = false;
                 }
             }
 
@@ -45,17 +45,20 @@ namespace NorthWindOrderForm
 
             foreach (var ord in linqOrds)
             {
-                orderIDComboBox.Items.Add(ord.OrderID);
+                lstOrderID.Items.Add(ord.OrderID);
             }
         }
 
+        /// <summary>
+        ///  Determine if the datetime object property from the database is null
+        /// </summary>
         public void EvaluateDateTime(DateTime? dateProperty, DateTimePicker dateControl)
         {
             if (dateProperty != null)
             {
                 dateControl.CustomFormat = null;
-                dateControl.Format = DateTimePickerFormat.Long; // set the date format you want.
-                dateControl.Value = (DateTime)dateProperty; // The error is here
+                dateControl.Format = DateTimePickerFormat.Long; 
+                dateControl.Value = (DateTime)dateProperty; 
             }
             else
             {
@@ -64,13 +67,71 @@ namespace NorthWindOrderForm
             }
         }
 
-        private void orderIDComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        /// <summary>
+        ///  Determine if the user provided shipped date is vald
+        /// </summary>
+        private bool ValidDateSelection()
+        {
+            //  ShippedDate cannot be earlier than OrderDate or later than RequiredDate, if these date values are not null
+
+            errorProvider1.Clear();
+          
+            DateTime sDate = Convert.ToDateTime(shippedDateDateTimePicker.Text);
+            DateTime oDate = Convert.ToDateTime(orderDateDateTimePicker.Text);
+            DateTime rDate = Convert.ToDateTime(requiredDateDateTimePicker.Text);
+
+            if (sDate <= oDate || sDate >= rDate)
+            {
+                // Shipped date is invalid
+                errorProvider1.Clear();
+                errorProvider1.SetError(shippedDateDateTimePicker, "Shipped date must be between the shipped date and the order date");
+                return false;
+            }
+            else
+            {                
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Save the new shipped date if it is valid
+        /// </summary>
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            lblSuccess.Visible = false;
+
+            if (ValidDateSelection())
+            {               
+                try
+                {
+                    // Call method to update the database
+                    int idToUpdate = Convert.ToInt32(lstOrderID.Text.Trim());
+                    NorthWindDataObjects.Update.UpdateItemInDB(idToUpdate, Convert.ToDateTime(shippedDateDateTimePicker.Text));
+
+                    // Display success
+                    lblSuccess.Visible = true;
+                    lblSuccess.Text = "Record updated successfully";
+                    lblSuccess.BackColor = Color.LawnGreen;
+                }
+                catch (Exception)
+                {
+                    // Unexpected error
+                    errorProvider1.SetError(btnSave, "Data cannot be saved");
+                }
+            }   
+        }
+
+        /// <summary>
+        /// Display information for the currently selected order id
+        /// </summary>
+        private void lstOrderID_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Get order information
-            var order = orderList.First(i => i.OrderID == Convert.ToInt32(orderIDComboBox.Text));
+            var order = orderList.First(i => i.OrderID == Convert.ToInt32(lstOrderID.Text));
 
             if (order != null)
             {
+                // Display order info
                 customerIDTextBox.Text = order.CustomerID;
                 employeeIDTextBox.Text = order.EmployeeID.ToString();
                 freightTextBox.Text = order.Freight.ToString();
@@ -78,7 +139,6 @@ namespace NorthWindOrderForm
                 EvaluateDateTime(order.ShippedDate, shippedDateDateTimePicker);
                 EvaluateDateTime(order.OrderDate, orderDateDateTimePicker);
                 EvaluateDateTime(order.RequiredDate, requiredDateDateTimePicker);
-
 
                 shipAddressTextBox.Text = order.ShipAddress;
                 shipCityTextBox.Text = order.ShipCity;
@@ -89,75 +149,38 @@ namespace NorthWindOrderForm
                 shipViaTextBox.Text = order.ShipVia.ToString();
             }
 
-            // Retrieve Order Detail Information (this is not working)
-            var orderDetails = from detail in orderDetailsList
-                               where detail.OrderID == Convert.ToInt32(orderIDComboBox.Text)
+            // Retrieve Order Detail Information 
+            var orderDetails = from item in orderDetailsList
+                               where item.OrderID == Convert.ToInt32(lstOrderID.Text)
                                select new
                                {
-                                   detail.ProductID,
-                                   detail.Quantity,
-                                   detail.Discount,
-                                   detail.UnitPrice
+                                   item.OrderID,
+                                   item.ProductID,
+                                   item.Quantity,
+                                   item.Discount,
+                                   item.UnitPrice
                                };
 
+            // Display the order details in the datagridview
             List<OrderDetails> newDetails = new List<OrderDetails>();
             float total = 0;
-            foreach (var row in orderDetails)
-            {               
-                OrderDetails details = new OrderDetails();
-                details.ProductID = row.ProductID;
-                details.Quantity = row.Quantity;
-                details.Discount = row.Discount;
-                details.UnitPrice = row.UnitPrice;
+            foreach (var item in orderDetails)
+            {
+                OrderDetails detail = new OrderDetails();
+                detail.OrderID = item.OrderID;
+                detail.ProductID = item.ProductID;
+                detail.Quantity = item.Quantity;
+                detail.Discount = item.Discount;
+                detail.UnitPrice = item.UnitPrice;
 
                 // Order Total
-                total += Convert.ToSingle(details.UnitPrice) * (1 - details.Discount) * (details.Quantity);
-
-                newDetails.Add(details);
+                total += Convert.ToSingle(detail.UnitPrice) * (1 - detail.Discount) * (detail.Quantity);
+                
+                // Append to list
+                newDetails.Add(detail);
             }
             orderDetailsDataGridView.DataSource = newDetails;
             txtOrderTotal.Text = total.ToString();
         }
-          
-        
-        //private void shippedDateDateTimePicker_ValueChanged(object sender, EventArgs e)
-        //{
-        //    //  ShippedDate cannot be earlier than OrderDate or later than RequiredDate, if these date values are not null
-
-        //    try
-        //    {
-        //        DateTime sDate = Convert.ToDateTime(shippedDateDateTimePicker.Text);
-        //        DateTime oDate = Convert.ToDateTime(orderDateDateTimePicker.Text);
-        //        DateTime rDate = Convert.ToDateTime(requiredDateDateTimePicker.Text);
-
-        //        if (sDate <= oDate || sDate >= rDate)
-        //        {
-        //            // Shipped date is invalid
-        //            errorProvider1.SetError(shippedDateDateTimePicker, "Shipped date must be between the shipped date and the order date");
-        //        }
-        //        else
-        //        {
-        //            errorProvider1.Clear();
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        errorProvider1.SetError(requiredDateDateTimePicker, "Unable to change Shipped date");
-        //    }
-                  
-        //}
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                int idToUpdate = Convert.ToInt32(orderIDComboBox.Text.Trim());
-                NorthWindDataObjects.Update.UpdateItemInDB(idToUpdate, Convert.ToDateTime(shippedDateDateTimePicker.Text));
-            }
-            catch (Exception)
-            {
-                errorProvider1.SetError(btnSave, "Data cannot be saved");
-            }        
-        }           
     }
 }

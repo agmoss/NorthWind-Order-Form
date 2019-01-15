@@ -47,7 +47,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.orderBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
-            this.orderBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -63,7 +62,6 @@
             this.employeeIDTextBox = new System.Windows.Forms.TextBox();
             this.freightTextBox = new System.Windows.Forms.TextBox();
             this.orderDateDateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.orderIDComboBox = new System.Windows.Forms.ComboBox();
             this.requiredDateDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.shipAddressTextBox = new System.Windows.Forms.TextBox();
             this.shipCityTextBox = new System.Windows.Forms.TextBox();
@@ -73,17 +71,20 @@
             this.shipRegionTextBox = new System.Windows.Forms.TextBox();
             this.shipViaTextBox = new System.Windows.Forms.TextBox();
             this.orderDetailsDataGridView = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtOrderTotal = new System.Windows.Forms.TextBox();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnSave = new System.Windows.Forms.Button();
+            this.shippedDateDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.lblSuccess = new System.Windows.Forms.Label();
+            this.lstOrderID = new System.Windows.Forms.ListBox();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.orderDetailsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtOrderTotal = new System.Windows.Forms.TextBox();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.btnSave = new System.Windows.Forms.Button();
-            this.shippedDateDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.orderBindingSource = new System.Windows.Forms.BindingSource(this.components);
             customerIDLabel = new System.Windows.Forms.Label();
             employeeIDLabel = new System.Windows.Forms.Label();
             freightLabel = new System.Windows.Forms.Label();
@@ -101,16 +102,16 @@
             label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.orderBindingNavigator)).BeginInit();
             this.orderBindingNavigator.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.orderDetailsDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.orderDetailsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.orderDetailsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // customerIDLabel
             // 
             customerIDLabel.AutoSize = true;
-            customerIDLabel.Location = new System.Drawing.Point(412, 46);
+            customerIDLabel.Location = new System.Drawing.Point(210, 54);
             customerIDLabel.Name = "customerIDLabel";
             customerIDLabel.Size = new System.Drawing.Size(68, 13);
             customerIDLabel.TabIndex = 1;
@@ -119,7 +120,7 @@
             // employeeIDLabel
             // 
             employeeIDLabel.AutoSize = true;
-            employeeIDLabel.Location = new System.Drawing.Point(412, 72);
+            employeeIDLabel.Location = new System.Drawing.Point(210, 80);
             employeeIDLabel.Name = "employeeIDLabel";
             employeeIDLabel.Size = new System.Drawing.Size(70, 13);
             employeeIDLabel.TabIndex = 3;
@@ -128,7 +129,7 @@
             // freightLabel
             // 
             freightLabel.AutoSize = true;
-            freightLabel.Location = new System.Drawing.Point(412, 98);
+            freightLabel.Location = new System.Drawing.Point(210, 106);
             freightLabel.Name = "freightLabel";
             freightLabel.Size = new System.Drawing.Size(42, 13);
             freightLabel.TabIndex = 5;
@@ -137,7 +138,7 @@
             // orderDateLabel
             // 
             orderDateLabel.AutoSize = true;
-            orderDateLabel.Location = new System.Drawing.Point(412, 176);
+            orderDateLabel.Location = new System.Drawing.Point(210, 184);
             orderDateLabel.Name = "orderDateLabel";
             orderDateLabel.Size = new System.Drawing.Size(62, 13);
             orderDateLabel.TabIndex = 7;
@@ -146,7 +147,7 @@
             // orderIDLabel
             // 
             orderIDLabel.AutoSize = true;
-            orderIDLabel.Location = new System.Drawing.Point(41, 173);
+            orderIDLabel.Location = new System.Drawing.Point(35, 184);
             orderIDLabel.Name = "orderIDLabel";
             orderIDLabel.Size = new System.Drawing.Size(50, 13);
             orderIDLabel.TabIndex = 9;
@@ -155,7 +156,7 @@
             // requiredDateLabel
             // 
             requiredDateLabel.AutoSize = true;
-            requiredDateLabel.Location = new System.Drawing.Point(412, 205);
+            requiredDateLabel.Location = new System.Drawing.Point(210, 213);
             requiredDateLabel.Name = "requiredDateLabel";
             requiredDateLabel.Size = new System.Drawing.Size(79, 13);
             requiredDateLabel.TabIndex = 11;
@@ -164,7 +165,7 @@
             // shipAddressLabel
             // 
             shipAddressLabel.AutoSize = true;
-            shipAddressLabel.Location = new System.Drawing.Point(758, 120);
+            shipAddressLabel.Location = new System.Drawing.Point(536, 132);
             shipAddressLabel.Name = "shipAddressLabel";
             shipAddressLabel.Size = new System.Drawing.Size(72, 13);
             shipAddressLabel.TabIndex = 13;
@@ -173,7 +174,7 @@
             // shipCityLabel
             // 
             shipCityLabel.AutoSize = true;
-            shipCityLabel.Location = new System.Drawing.Point(758, 94);
+            shipCityLabel.Location = new System.Drawing.Point(536, 106);
             shipCityLabel.Name = "shipCityLabel";
             shipCityLabel.Size = new System.Drawing.Size(51, 13);
             shipCityLabel.TabIndex = 15;
@@ -182,7 +183,7 @@
             // shipCountryLabel
             // 
             shipCountryLabel.AutoSize = true;
-            shipCountryLabel.Location = new System.Drawing.Point(758, 68);
+            shipCountryLabel.Location = new System.Drawing.Point(536, 80);
             shipCountryLabel.Name = "shipCountryLabel";
             shipCountryLabel.Size = new System.Drawing.Size(70, 13);
             shipCountryLabel.TabIndex = 17;
@@ -191,7 +192,7 @@
             // shipNameLabel
             // 
             shipNameLabel.AutoSize = true;
-            shipNameLabel.Location = new System.Drawing.Point(758, 42);
+            shipNameLabel.Location = new System.Drawing.Point(536, 54);
             shipNameLabel.Name = "shipNameLabel";
             shipNameLabel.Size = new System.Drawing.Size(62, 13);
             shipNameLabel.TabIndex = 19;
@@ -200,7 +201,7 @@
             // shippedDateLabel
             // 
             shippedDateLabel.AutoSize = true;
-            shippedDateLabel.Location = new System.Drawing.Point(412, 231);
+            shippedDateLabel.Location = new System.Drawing.Point(210, 239);
             shippedDateLabel.Name = "shippedDateLabel";
             shippedDateLabel.Size = new System.Drawing.Size(75, 13);
             shippedDateLabel.TabIndex = 21;
@@ -209,7 +210,7 @@
             // shipPostalCodeLabel
             // 
             shipPostalCodeLabel.AutoSize = true;
-            shipPostalCodeLabel.Location = new System.Drawing.Point(758, 146);
+            shipPostalCodeLabel.Location = new System.Drawing.Point(536, 158);
             shipPostalCodeLabel.Name = "shipPostalCodeLabel";
             shipPostalCodeLabel.Size = new System.Drawing.Size(91, 13);
             shipPostalCodeLabel.TabIndex = 23;
@@ -218,7 +219,7 @@
             // shipRegionLabel
             // 
             shipRegionLabel.AutoSize = true;
-            shipRegionLabel.Location = new System.Drawing.Point(758, 172);
+            shipRegionLabel.Location = new System.Drawing.Point(536, 184);
             shipRegionLabel.Name = "shipRegionLabel";
             shipRegionLabel.Size = new System.Drawing.Size(68, 13);
             shipRegionLabel.TabIndex = 25;
@@ -227,7 +228,7 @@
             // shipViaLabel
             // 
             shipViaLabel.AutoSize = true;
-            shipViaLabel.Location = new System.Drawing.Point(758, 198);
+            shipViaLabel.Location = new System.Drawing.Point(536, 210);
             shipViaLabel.Name = "shipViaLabel";
             shipViaLabel.Size = new System.Drawing.Size(49, 13);
             shipViaLabel.TabIndex = 27;
@@ -236,7 +237,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(411, 142);
+            label2.Location = new System.Drawing.Point(209, 150);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(63, 13);
             label2.TabIndex = 5;
@@ -268,7 +269,7 @@
             this.orderBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.orderBindingNavigator.Name = "orderBindingNavigator";
             this.orderBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.orderBindingNavigator.Size = new System.Drawing.Size(1074, 25);
+            this.orderBindingNavigator.Size = new System.Drawing.Size(890, 25);
             this.orderBindingNavigator.TabIndex = 0;
             this.orderBindingNavigator.Text = "bindingNavigator1";
             // 
@@ -280,10 +281,6 @@
             this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
             this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorAddNewItem.Text = "Add new";
-            // 
-            // orderBindingSource
-            // 
-            this.orderBindingSource.DataSource = typeof(NorthWindDataObjects.Order);
             // 
             // bindingNavigatorCountItem
             // 
@@ -374,7 +371,7 @@
             // 
             this.customerIDTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.orderBindingSource, "CustomerID", true));
             this.customerIDTextBox.Enabled = false;
-            this.customerIDTextBox.Location = new System.Drawing.Point(509, 43);
+            this.customerIDTextBox.Location = new System.Drawing.Point(307, 51);
             this.customerIDTextBox.Name = "customerIDTextBox";
             this.customerIDTextBox.Size = new System.Drawing.Size(200, 20);
             this.customerIDTextBox.TabIndex = 2;
@@ -383,7 +380,7 @@
             // 
             this.employeeIDTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.orderBindingSource, "EmployeeID", true));
             this.employeeIDTextBox.Enabled = false;
-            this.employeeIDTextBox.Location = new System.Drawing.Point(509, 69);
+            this.employeeIDTextBox.Location = new System.Drawing.Point(307, 77);
             this.employeeIDTextBox.Name = "employeeIDTextBox";
             this.employeeIDTextBox.Size = new System.Drawing.Size(200, 20);
             this.employeeIDTextBox.TabIndex = 4;
@@ -392,7 +389,7 @@
             // 
             this.freightTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.orderBindingSource, "Freight", true));
             this.freightTextBox.Enabled = false;
-            this.freightTextBox.Location = new System.Drawing.Point(509, 95);
+            this.freightTextBox.Location = new System.Drawing.Point(307, 103);
             this.freightTextBox.Name = "freightTextBox";
             this.freightTextBox.Size = new System.Drawing.Size(200, 20);
             this.freightTextBox.TabIndex = 6;
@@ -402,27 +399,17 @@
             this.orderDateDateTimePicker.Checked = false;
             this.orderDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.orderBindingSource, "OrderDate", true));
             this.orderDateDateTimePicker.Enabled = false;
-            this.orderDateDateTimePicker.Location = new System.Drawing.Point(509, 172);
+            this.orderDateDateTimePicker.Location = new System.Drawing.Point(307, 180);
             this.orderDateDateTimePicker.Name = "orderDateDateTimePicker";
             this.orderDateDateTimePicker.Size = new System.Drawing.Size(200, 20);
             this.orderDateDateTimePicker.TabIndex = 8;
-            // 
-            // orderIDComboBox
-            // 
-            this.orderIDComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.orderBindingSource, "OrderID", true));
-            this.orderIDComboBox.FormattingEnabled = true;
-            this.orderIDComboBox.Location = new System.Drawing.Point(138, 170);
-            this.orderIDComboBox.Name = "orderIDComboBox";
-            this.orderIDComboBox.Size = new System.Drawing.Size(200, 21);
-            this.orderIDComboBox.TabIndex = 10;
-            this.orderIDComboBox.SelectedIndexChanged += new System.EventHandler(this.orderIDComboBox_SelectedIndexChanged);
             // 
             // requiredDateDateTimePicker
             // 
             this.requiredDateDateTimePicker.Checked = false;
             this.requiredDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.orderBindingSource, "RequiredDate", true));
             this.requiredDateDateTimePicker.Enabled = false;
-            this.requiredDateDateTimePicker.Location = new System.Drawing.Point(509, 201);
+            this.requiredDateDateTimePicker.Location = new System.Drawing.Point(307, 209);
             this.requiredDateDateTimePicker.Name = "requiredDateDateTimePicker";
             this.requiredDateDateTimePicker.Size = new System.Drawing.Size(200, 20);
             this.requiredDateDateTimePicker.TabIndex = 12;
@@ -431,7 +418,7 @@
             // 
             this.shipAddressTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.orderBindingSource, "ShipAddress", true));
             this.shipAddressTextBox.Enabled = false;
-            this.shipAddressTextBox.Location = new System.Drawing.Point(855, 117);
+            this.shipAddressTextBox.Location = new System.Drawing.Point(633, 129);
             this.shipAddressTextBox.Name = "shipAddressTextBox";
             this.shipAddressTextBox.Size = new System.Drawing.Size(200, 20);
             this.shipAddressTextBox.TabIndex = 14;
@@ -440,7 +427,7 @@
             // 
             this.shipCityTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.orderBindingSource, "ShipCity", true));
             this.shipCityTextBox.Enabled = false;
-            this.shipCityTextBox.Location = new System.Drawing.Point(855, 91);
+            this.shipCityTextBox.Location = new System.Drawing.Point(633, 103);
             this.shipCityTextBox.Name = "shipCityTextBox";
             this.shipCityTextBox.Size = new System.Drawing.Size(200, 20);
             this.shipCityTextBox.TabIndex = 16;
@@ -449,7 +436,7 @@
             // 
             this.shipCountryTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.orderBindingSource, "ShipCountry", true));
             this.shipCountryTextBox.Enabled = false;
-            this.shipCountryTextBox.Location = new System.Drawing.Point(855, 65);
+            this.shipCountryTextBox.Location = new System.Drawing.Point(633, 77);
             this.shipCountryTextBox.Name = "shipCountryTextBox";
             this.shipCountryTextBox.Size = new System.Drawing.Size(200, 20);
             this.shipCountryTextBox.TabIndex = 18;
@@ -458,7 +445,7 @@
             // 
             this.shipNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.orderBindingSource, "ShipName", true));
             this.shipNameTextBox.Enabled = false;
-            this.shipNameTextBox.Location = new System.Drawing.Point(855, 39);
+            this.shipNameTextBox.Location = new System.Drawing.Point(633, 51);
             this.shipNameTextBox.Name = "shipNameTextBox";
             this.shipNameTextBox.Size = new System.Drawing.Size(200, 20);
             this.shipNameTextBox.TabIndex = 20;
@@ -467,7 +454,7 @@
             // 
             this.shipPostalCodeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.orderBindingSource, "ShipPostalCode", true));
             this.shipPostalCodeTextBox.Enabled = false;
-            this.shipPostalCodeTextBox.Location = new System.Drawing.Point(855, 143);
+            this.shipPostalCodeTextBox.Location = new System.Drawing.Point(633, 155);
             this.shipPostalCodeTextBox.Name = "shipPostalCodeTextBox";
             this.shipPostalCodeTextBox.Size = new System.Drawing.Size(200, 20);
             this.shipPostalCodeTextBox.TabIndex = 24;
@@ -476,7 +463,7 @@
             // 
             this.shipRegionTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.orderBindingSource, "ShipRegion", true));
             this.shipRegionTextBox.Enabled = false;
-            this.shipRegionTextBox.Location = new System.Drawing.Point(855, 169);
+            this.shipRegionTextBox.Location = new System.Drawing.Point(633, 181);
             this.shipRegionTextBox.Name = "shipRegionTextBox";
             this.shipRegionTextBox.Size = new System.Drawing.Size(200, 20);
             this.shipRegionTextBox.TabIndex = 26;
@@ -485,7 +472,7 @@
             // 
             this.shipViaTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.orderBindingSource, "ShipVia", true));
             this.shipViaTextBox.Enabled = false;
-            this.shipViaTextBox.Location = new System.Drawing.Point(855, 195);
+            this.shipViaTextBox.Location = new System.Drawing.Point(633, 207);
             this.shipViaTextBox.Name = "shipViaTextBox";
             this.shipViaTextBox.Size = new System.Drawing.Size(200, 20);
             this.shipViaTextBox.TabIndex = 28;
@@ -501,10 +488,68 @@
             this.dataGridViewTextBoxColumn4,
             this.dataGridViewTextBoxColumn5});
             this.orderDetailsDataGridView.DataSource = this.orderDetailsBindingSource;
-            this.orderDetailsDataGridView.Location = new System.Drawing.Point(496, 272);
+            this.orderDetailsDataGridView.Location = new System.Drawing.Point(293, 289);
             this.orderDetailsDataGridView.Name = "orderDetailsDataGridView";
-            this.orderDetailsDataGridView.Size = new System.Drawing.Size(559, 215);
+            this.orderDetailsDataGridView.Size = new System.Drawing.Size(559, 162);
             this.orderDetailsDataGridView.TabIndex = 29;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(47, 54);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(113, 72);
+            this.label1.TabIndex = 30;
+            this.label1.Text = "NorthWind\r\nOrder\r\nInformation\r\n";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // txtOrderTotal
+            // 
+            this.txtOrderTotal.Enabled = false;
+            this.txtOrderTotal.Location = new System.Drawing.Point(306, 147);
+            this.txtOrderTotal.Name = "txtOrderTotal";
+            this.txtOrderTotal.Size = new System.Drawing.Size(200, 20);
+            this.txtOrderTotal.TabIndex = 6;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(529, 239);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.TabIndex = 31;
+            this.btnSave.Text = "Save Changes";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // shippedDateDateTimePicker
+            // 
+            this.shippedDateDateTimePicker.Checked = false;
+            this.shippedDateDateTimePicker.Location = new System.Drawing.Point(307, 239);
+            this.shippedDateDateTimePicker.Name = "shippedDateDateTimePicker";
+            this.shippedDateDateTimePicker.Size = new System.Drawing.Size(200, 20);
+            this.shippedDateDateTimePicker.TabIndex = 12;
+            // 
+            // lblSuccess
+            // 
+            this.lblSuccess.AutoSize = true;
+            this.lblSuccess.Location = new System.Drawing.Point(617, 244);
+            this.lblSuccess.Name = "lblSuccess";
+            this.lblSuccess.Size = new System.Drawing.Size(0, 13);
+            this.lblSuccess.TabIndex = 32;
+            // 
+            // lstOrderID
+            // 
+            this.lstOrderID.FormattingEnabled = true;
+            this.lstOrderID.Location = new System.Drawing.Point(38, 213);
+            this.lstOrderID.Name = "lstOrderID";
+            this.lstOrderID.Size = new System.Drawing.Size(122, 238);
+            this.lstOrderID.TabIndex = 33;
+            this.lstOrderID.SelectedIndexChanged += new System.EventHandler(this.lstOrderID_SelectedIndexChanged);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -540,51 +585,17 @@
             // 
             this.orderDetailsBindingSource.DataSource = typeof(NorthWindDataObjects.OrderDetails);
             // 
-            // label1
+            // orderBindingSource
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(84, 65);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(312, 25);
-            this.label1.TabIndex = 30;
-            this.label1.Text = "NorthWind Order Information";
-            // 
-            // txtOrderTotal
-            // 
-            this.txtOrderTotal.Enabled = false;
-            this.txtOrderTotal.Location = new System.Drawing.Point(508, 139);
-            this.txtOrderTotal.Name = "txtOrderTotal";
-            this.txtOrderTotal.Size = new System.Drawing.Size(200, 20);
-            this.txtOrderTotal.TabIndex = 6;
-            // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
-            // 
-            // btnSave
-            // 
-            this.btnSave.Location = new System.Drawing.Point(336, 423);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 31;
-            this.btnSave.Text = "Save Changes";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // shippedDateDateTimePicker
-            // 
-            this.shippedDateDateTimePicker.Checked = false;
-            this.shippedDateDateTimePicker.Location = new System.Drawing.Point(509, 231);
-            this.shippedDateDateTimePicker.Name = "shippedDateDateTimePicker";
-            this.shippedDateDateTimePicker.Size = new System.Drawing.Size(200, 20);
-            this.shippedDateDateTimePicker.TabIndex = 12;
+            this.orderBindingSource.DataSource = typeof(NorthWindDataObjects.Order);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1074, 499);
+            this.ClientSize = new System.Drawing.Size(890, 485);
+            this.Controls.Add(this.lstOrderID);
+            this.Controls.Add(this.lblSuccess);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.orderDetailsDataGridView);
@@ -599,7 +610,6 @@
             this.Controls.Add(orderDateLabel);
             this.Controls.Add(this.orderDateDateTimePicker);
             this.Controls.Add(orderIDLabel);
-            this.Controls.Add(this.orderIDComboBox);
             this.Controls.Add(requiredDateLabel);
             this.Controls.Add(this.shippedDateDateTimePicker);
             this.Controls.Add(this.requiredDateDateTimePicker);
@@ -625,10 +635,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.orderBindingNavigator)).EndInit();
             this.orderBindingNavigator.ResumeLayout(false);
             this.orderBindingNavigator.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.orderDetailsDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.orderDetailsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.orderDetailsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -654,7 +664,6 @@
         private System.Windows.Forms.TextBox employeeIDTextBox;
         private System.Windows.Forms.TextBox freightTextBox;
         private System.Windows.Forms.DateTimePicker orderDateDateTimePicker;
-        private System.Windows.Forms.ComboBox orderIDComboBox;
         private System.Windows.Forms.DateTimePicker requiredDateDateTimePicker;
         private System.Windows.Forms.TextBox shipAddressTextBox;
         private System.Windows.Forms.TextBox shipCityTextBox;
@@ -675,6 +684,8 @@
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.DateTimePicker shippedDateDateTimePicker;
+        private System.Windows.Forms.Label lblSuccess;
+        private System.Windows.Forms.ListBox lstOrderID;
     }
 }
 
